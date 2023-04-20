@@ -1,7 +1,33 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
+
+
+var currentDay = dayjs();
+$("#currentDay").text(currentDay.format('MMM D, YYYY h:mm A'));
+
 $(function () {
+  var buttonEl = $(".saveBtn");    //general button
+  //event listener, once clicked, triggers "this" in order to specify which button user hits 
+
+  buttonEl.on('click', function(e){
+  let btn = $(this);  
+
+  var parent = btn.parent().attr("id");
+  var sibling = btn.siblings("textarea").val();
+  localStorage.setItem(parent,sibling);
+  
+  })
+
+ // $('#hour-9 > textarea').val(localStorage.getItem("hour-9")); starting
+ 
+  for (var i = 8; i < 18; i++){
+    $('#hour-'+ i + '> textarea').val(localStorage.getItem('hour-' + i));
+  }
+
+
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
