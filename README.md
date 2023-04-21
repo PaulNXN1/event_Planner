@@ -29,6 +29,7 @@ Below is an image of the final project:
 ## Deployment 
 
 URL of the deployed site:
+https://paulnxn1.github.io/event_Planner/
 
 
 

@@ -21,7 +21,7 @@ $(function () {
 
  // $('#hour-9 > textarea').val(localStorage.getItem("hour-9")); starting code - did not use.  
 
- // A "for" loop is the best / easiest way to emcompass each hour block
+ // a for loop is the best / easiest way to emcompass each hour block
  
 
  for (var i = 8; i < 18; i++){
