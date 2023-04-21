@@ -1,14 +1,13 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 
-
+// day.js() code to display the date, time when the user enters the page.  
 
 var currentDay = dayjs();
 $("#currentDay").text(currentDay.format('MMM D, YYYY h:mm A'));
 
+
 $(function () {
   var buttonEl = $(".saveBtn");    //general button
+
   //event listener, once clicked, triggers "this" in order to specify which button user hits 
 
   buttonEl.on('click', function(e){
@@ -17,33 +16,46 @@ $(function () {
   var parent = btn.parent().attr("id");
   var sibling = btn.siblings("textarea").val();
   localStorage.setItem(parent,sibling);
-  
+
   })
 
- // $('#hour-9 > textarea').val(localStorage.getItem("hour-9")); starting
+ // $('#hour-9 > textarea').val(localStorage.getItem("hour-9")); starting code - did not use.  
+
+ // a for loop is the best / easiest way to emcompass each hour block
  
-  for (var i = 8; i < 18; i++){
-    $('#hour-'+ i + '> textarea').val(localStorage.getItem('hour-' + i));
+
+ for (var i = 8; i < 18; i++){
+  $('#hour-'+ i + '> textarea').val(localStorage.getItem('hour-' + i));
+}})
+
+// need to add "if" statement to change colors
+
+
+var hours = [8,9,10,11,12,13,14,15,16,17];
+
+for (var i = 0; i < hours.length; i++){
+  var Hour = hours[i];
+ 
+ var currentHour = parseInt(currentDay.format("H"));
+
+ 
+  if (currentHour < Hour){
+// future
+   document.getElementById("hour-" + Hour).classList.add("future");
+
+  } else if (currentHour > Hour) {
+// past
+
+    document.getElementById("hour-" + Hour).classList.add("past");
+
+  } else {
+//Current time
+
+document.getElementById("hour-" + Hour).classList.add("present");
+
   }
 
+}
 
 
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-});
+
